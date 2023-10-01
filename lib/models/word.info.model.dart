@@ -1,22 +1,95 @@
 class WordInfoModel {
   String word;
-  int id;
+  String? phonetic;
+  List<Phonetic> phonetics;
+  List<Meaning> meanings;
 
   WordInfoModel({
     required this.word,
-    required this.id,
+    this.phonetic,
+    required this.phonetics,
+    required this.meanings,
   });
+
+  factory WordInfoModel.fromJson(Map<String, dynamic> json) {
+    return WordInfoModel(
+      word: json['word'],
+      phonetic: json['phonetic'].toString().replaceAll('/', ''),
+      phonetics: json['phonetics']
+              .map<Phonetic>((pheonetic) => Phonetic.fromJson(pheonetic))
+              .toList() ??
+          [],
+      meanings: json['meanings']
+              .map<Meaning>((def) => Meaning.fromJson(def))
+              .toList() ??
+          [],
+    );
+  }
 }
 
 class Meaning {
   String partOfSpeech;
-  List<Definitions> definitions = [];
+  List<Definition> definitions;
+  List<dynamic> synonyms;
+  List<dynamic> antonyms;
 
-  Meaning({required this.partOfSpeech});
+  Meaning({
+    required this.partOfSpeech,
+    required this.definitions,
+    required this.synonyms,
+    required this.antonyms,
+  });
+
+  factory Meaning.fromJson(Map<String, dynamic> json) {
+    return Meaning(
+      partOfSpeech: json['partOfSpeech'],
+      definitions: json['definitions']
+              .map<Definition>((def) => Definition.fromJson(def))
+              .toList() ??
+          [],
+      synonyms: json['synonyms'],
+      antonyms: json['antonyms'],
+    );
+  }
 }
 
-class Definitions {}
+class Definition {
+  String definition;
+  List<dynamic> synonyms;
+  List<dynamic> antonyms;
+  String? example;
 
-class Phonetics {
-  String? audio;
+  Definition({
+    required this.definition,
+    required this.synonyms,
+    required this.antonyms,
+    this.example,
+  });
+
+  factory Definition.fromJson(Map<String, dynamic> json) {
+    return Definition(
+      definition: json['definition'],
+      synonyms: json['synonyms'],
+      antonyms: json['antonyms'],
+    );
+  }
+}
+
+class Phonetic {
+  String text;
+  String audio;
+  String? sourceUrl;
+
+  Phonetic({
+    required this.text,
+    required this.audio,
+    this.sourceUrl,
+  });
+
+  factory Phonetic.fromJson(Map<String, dynamic> json) {
+    return Phonetic(
+      text: json['text'],
+      audio: json['audio'],
+    );
+  }
 }

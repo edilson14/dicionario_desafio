@@ -24,4 +24,9 @@ class AppStyles {
     fontSize: 70,
     color: Colors.red,
   );
+
+  static TextStyle wordDetail = const TextStyle(
+    fontWeight: FontWeight.bold,
+    fontSize: 20,
+  );
 }

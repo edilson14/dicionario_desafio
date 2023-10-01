@@ -1,4 +1,4 @@
-import 'dart:convert';
+// ignore_for_file: invalid_use_of_protected_member
 
 import 'package:dicionario_desafio/api/api.dart';
 import 'package:get/get.dart';
@@ -11,8 +11,14 @@ class WordController extends GetxController {
 
   final DioServices _services = Get.find<DioServices>();
 
-  Word? _word;
-  WordInfoModel? _wordInfoModel;
+  late Word _word;
+  final _wordInfoModel = <WordInfoModel>[].obs;
+  String get pheonethic => _wordInfoModel
+      .firstWhere((element) => element.phonetic != null)
+      .phonetic!;
+  List<WordInfoModel> get wordInfo => _wordInfoModel.value;
+
+  Word get currentWord => _word;
 
   WordController() {
     _getWord();
@@ -20,14 +26,19 @@ class WordController extends GetxController {
 
   void _getWord() {
     _word = Get.arguments;
-    if (_word != null) _loadWordInfo(_word!);
+    _loadWordInfo(_word);
   }
 
   Future<void> _loadWordInfo(Word word) async {
     try {
       _loadingWord.value = true;
       var response = await _services.getWordInfo(word: word.word);
-      print(jsonEncode(response));
+
+      response.forEach((word) {
+        WordInfoModel info = WordInfoModel.fromJson(word);
+        _wordInfoModel.add(info);
+      });
+
       _loadingWord.value = false;
     } catch (e) {
       _loadingWord.value = false;

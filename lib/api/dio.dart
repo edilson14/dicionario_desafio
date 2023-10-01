@@ -14,7 +14,7 @@ class DioServices {
     try {
       Response response = await _dio.get(word);
 
-      print(response);
+      return response.data;
     } on DioException catch (e) {
       if (e.response != null) {
         if (e.response?.statusCode == 404) Get.offNamed(AppRoutes.notFound);

@@ -1,3 +1,4 @@
+import 'package:dicionario_desafio/components/components.dart';
 import 'package:dicionario_desafio/controllers/audio.controller.dart';
 import 'package:dicionario_desafio/controllers/word.controller.dart';
 import 'package:dicionario_desafio/styles/styles.dart';
@@ -23,37 +24,78 @@ class WordPage extends StatelessWidget {
                   )
                 : Column(
                     children: [
-                      Align(
-                        alignment: Alignment.topLeft,
-                        child: IconButton(
-                          icon: const Icon(Icons.close),
-                          onPressed: () => Get.back(),
-                        ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          IconButton(
+                            icon: const Icon(
+                              Icons.close,
+                              semanticLabel: 'Fechar Página',
+                            ),
+                            onPressed: () => Get.back(),
+                          ),
+                          IconButton(
+                            icon: const Icon(
+                              Icons.favorite,
+                              semanticLabel: 'Marcar como favorito',
+                            ),
+                            onPressed: () => Get.back(),
+                          ),
+                        ],
                       ),
-                      const Text('Word Details'),
                       Expanded(
                         child: Column(
                           children: [
-                            const Center(),
-                            const SizedBox(
-                              height: 50,
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Obx(
-                                  () => IconButton(
-                                    iconSize: 50,
-                                    onPressed: () =>
-                                        _audioController.playAudio(),
-                                    icon: Icon(_audioController.audioStatus ==
-                                            AudioStatus.playing
-                                        ? Icons.pause
-                                        : Icons.play_arrow),
+                            Flexible(
+                              flex: 1,
+                              child: SizedBox(
+                                width: MediaQuery.of(context).size.width,
+                                child: Card(
+                                  color:
+                                      const Color.fromARGB(255, 202, 120, 120),
+                                  child: Expanded(
+                                    child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Text(
+                                          _wordController.currentWord.word,
+                                          style: AppStyles.wordDetail,
+                                        ),
+                                        const SizedBox(
+                                          height: 20,
+                                        ),
+                                        Text(
+                                          _wordController.pheonethic,
+                                          style: AppStyles.wordDetail,
+                                        )
+                                      ],
+                                    ),
                                   ),
                                 ),
-                              ],
-                            )
+                              ),
+                            ),
+                            Flexible(
+                              flex: 2,
+                              child: Row(
+                                children: [
+                                  Obx(
+                                    () => IconButton(
+                                      iconSize: 50,
+                                      onPressed: () => _audioController
+                                          .playAudio(audioUrl: ''),
+                                      icon: Icon(
+                                        _audioController.audioStatus ==
+                                                AudioStatus.playing
+                                            ? Icons.pause
+                                            : Icons.play_arrow,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            const MeaningComponent(),
                           ],
                         ),
                       ),
@@ -72,7 +114,7 @@ class WordPage extends StatelessWidget {
                             style: AppStyles.buttonStyle,
                             onPressed: () {},
                             child: Text(
-                              'Proximo',
+                              'Próximo',
                               style: AppStyles.textStyleButton,
                             ),
                           ),

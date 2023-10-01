@@ -8,7 +8,7 @@ class AudioController extends GetxController {
   AudioStatus get audioStatus => _audioStatus.value;
   final AudioPlayer _audioPlayer = AudioPlayer();
 
-  void playAudio() {
+  void playAudio({required String audioUrl}) {
     _audioStatus.value = AudioStatus.paused;
   }
 }
