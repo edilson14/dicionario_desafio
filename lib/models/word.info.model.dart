@@ -1,24 +1,35 @@
+import 'package:get/get.dart';
+
 class WordInfoModel {
   String word;
   String? phonetic;
   List<Phonetic> phonetics;
   List<Meaning> meanings;
+  String? audioUrl;
 
   WordInfoModel({
     required this.word,
     this.phonetic,
     required this.phonetics,
     required this.meanings,
+    this.audioUrl,
   });
 
   factory WordInfoModel.fromJson(Map<String, dynamic> json) {
+    List<Phonetic> pheonethics = json['phonetics']
+            .map<Phonetic>((pheonetic) => Phonetic.fromJson(pheonetic))
+            .toList() ??
+        [];
+
     return WordInfoModel(
       word: json['word'],
+      audioUrl: pheonethics
+          .firstWhereOrNull(
+            (element) => element.audio.isNotEmpty,
+          )
+          ?.audio,
       phonetic: json['phonetic'].toString().replaceAll('/', ''),
-      phonetics: json['phonetics']
-              .map<Phonetic>((pheonetic) => Phonetic.fromJson(pheonetic))
-              .toList() ??
-          [],
+      phonetics: pheonethics,
       meanings: json['meanings']
               .map<Meaning>((def) => Meaning.fromJson(def))
               .toList() ??
@@ -78,12 +89,10 @@ class Definition {
 class Phonetic {
   String text;
   String audio;
-  String? sourceUrl;
 
   Phonetic({
     required this.text,
     required this.audio,
-    this.sourceUrl,
   });
 
   factory Phonetic.fromJson(Map<String, dynamic> json) {

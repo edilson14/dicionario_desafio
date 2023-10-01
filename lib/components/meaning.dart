@@ -9,7 +9,13 @@ class MeaningComponent extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
-        Text('Meanings'),
+        Text(
+          'Meanings',
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 30,
+          ),
+        ),
         Row(
           children: [
             Text('Type - '),

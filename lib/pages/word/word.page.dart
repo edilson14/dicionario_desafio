@@ -47,43 +47,42 @@ class WordPage extends StatelessWidget {
                         child: Column(
                           children: [
                             Flexible(
-                              flex: 1,
+                              flex: 2,
                               child: SizedBox(
                                 width: MediaQuery.of(context).size.width,
                                 child: Card(
                                   color:
                                       const Color.fromARGB(255, 202, 120, 120),
-                                  child: Expanded(
-                                    child: Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        Text(
-                                          _wordController.currentWord.word,
-                                          style: AppStyles.wordDetail,
-                                        ),
-                                        const SizedBox(
-                                          height: 20,
-                                        ),
-                                        Text(
-                                          _wordController.pheonethic,
-                                          style: AppStyles.wordDetail,
-                                        )
-                                      ],
-                                    ),
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Text(
+                                        _wordController.currentWord.word,
+                                        style: AppStyles.wordDetail,
+                                      ),
+                                      const SizedBox(
+                                        height: 20,
+                                      ),
+                                      Text(
+                                        _wordController.pheonethic,
+                                        style: AppStyles.wordDetail,
+                                      )
+                                    ],
                                   ),
                                 ),
                               ),
                             ),
                             Flexible(
-                              flex: 2,
+                              flex: 1,
                               child: Row(
                                 children: [
                                   Obx(
                                     () => IconButton(
                                       iconSize: 50,
-                                      onPressed: () => _audioController
-                                          .playAudio(audioUrl: ''),
+                                      onPressed: () =>
+                                          _audioController.playAudio(
+                                        audioUrl: _wordController.audioUrl,
+                                      ),
                                       icon: Icon(
                                         _audioController.audioStatus ==
                                                 AudioStatus.playing
@@ -92,10 +91,18 @@ class WordPage extends StatelessWidget {
                                       ),
                                     ),
                                   ),
+                                  Slider(
+                                    value: 0,
+                                    max: 0.1,
+                                    onChanged: (double value) {},
+                                  )
                                 ],
                               ),
                             ),
-                            const MeaningComponent(),
+                            const Flexible(
+                              flex: 2,
+                              child: MeaningComponent(),
+                            ),
                           ],
                         ),
                       ),

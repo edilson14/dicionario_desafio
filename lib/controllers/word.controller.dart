@@ -8,17 +8,19 @@ import '../models/models.dart';
 class WordController extends GetxController {
   final _loadingWord = true.obs;
   bool get loadingWord => _loadingWord.value;
-
+  String _audioUrl = '';
   final DioServices _services = Get.find<DioServices>();
 
   late Word _word;
   final _wordInfoModel = <WordInfoModel>[].obs;
+  // String get pheonethic => 'Edilson';
   String get pheonethic => _wordInfoModel
       .firstWhere((element) => element.phonetic != null)
       .phonetic!;
   List<WordInfoModel> get wordInfo => _wordInfoModel.value;
 
   Word get currentWord => _word;
+  String get audioUrl => _audioUrl;
 
   WordController() {
     _getWord();
@@ -39,6 +41,9 @@ class WordController extends GetxController {
         _wordInfoModel.add(info);
       });
 
+      _audioUrl = _wordInfoModel.value
+          .firstWhere((element) => element.audioUrl!.isNotEmpty)
+          .audioUrl!;
       _loadingWord.value = false;
     } catch (e) {
       _loadingWord.value = false;
