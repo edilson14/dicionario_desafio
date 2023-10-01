@@ -18,4 +18,10 @@ class AppStyles {
     color: Colors.black,
     fontWeight: FontWeight.bold,
   );
+
+  static TextStyle notFoundTitle = const TextStyle(
+    fontWeight: FontWeight.bold,
+    fontSize: 70,
+    color: Colors.red,
+  );
 }

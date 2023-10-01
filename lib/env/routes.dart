@@ -4,4 +4,6 @@ class AppRoutes {
   static String initialPage = '/';
 
   static String wordDetails = '/word-details';
+
+  static String notFound = '/404';
 }

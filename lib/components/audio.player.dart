@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class AudioPlayerComponent extends StatelessWidget {
-  final AudioController controller = Get.find();
+  final AudioController controller = Get.find<AudioController>();
   AudioPlayerComponent({super.key});
 
   @override
@@ -15,7 +15,11 @@ class AudioPlayerComponent extends StatelessWidget {
           onPressed: controller.playAudio,
           iconSize: 50,
           icon: Obx(
-            () => Icon(controller.isPlaying ? Icons.pause : Icons.play_arrow),
+            () => Icon(
+              controller.audioStatus == AudioStatus.playing
+                  ? Icons.pause
+                  : Icons.play_arrow,
+            ),
           ),
         ),
       ],

@@ -3,9 +3,9 @@ import 'package:get/get.dart';
 
 enum AudioStatus { playing, paused }
 
-class AudioController {
+class AudioController extends GetxController {
   final _audioStatus = AudioStatus.paused.obs;
-  bool get isPlaying => _audioStatus.value == AudioStatus.playing;
+  AudioStatus get audioStatus => _audioStatus.value;
   final AudioPlayer _audioPlayer = AudioPlayer();
 
   void playAudio() {
