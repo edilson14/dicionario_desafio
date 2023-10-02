@@ -1,104 +1,69 @@
-import 'package:get/get.dart';
+import 'models.dart';
 
 class WordInfoModel {
+  int id;
   String word;
-  String? phonetic;
-  List<Phonetic> phonetics;
-  List<Meaning> meanings;
-  String? audioUrl;
+  String audiourl;
+  String pheonetic;
+  List<String> meaning;
 
   WordInfoModel({
+    required this.id,
     required this.word,
-    this.phonetic,
-    required this.phonetics,
-    required this.meanings,
-    this.audioUrl,
+    required this.audiourl,
+    required this.pheonetic,
+    required this.meaning,
   });
 
-  factory WordInfoModel.fromJson(Map<String, dynamic> json) {
-    List<Phonetic> pheonethics = json['phonetics']
-            .map<Phonetic>((pheonetic) => Phonetic.fromJson(pheonetic))
-            .toList() ??
-        [];
-
+  factory WordInfoModel.fromWordResponse(
+    int id, {
+    required List<WordResponseModel> words,
+  }) {
     return WordInfoModel(
-      word: json['word'],
-      audioUrl: pheonethics
-          .firstWhereOrNull(
-            (element) => element.audio.isNotEmpty,
-          )
-          ?.audio,
-      phonetic: json['phonetic'].toString().replaceAll('/', ''),
-      phonetics: pheonethics,
-      meanings: json['meanings']
-              .map<Meaning>((def) => Meaning.fromJson(def))
-              .toList() ??
-          [],
+      id: id,
+      audiourl: _getAudioUrl(words: words),
+      word: words[0].word,
+      pheonetic: _getPheonetic(words: words),
+      meaning: _getMeanigns(words: words),
     );
   }
-}
 
-class Meaning {
-  String partOfSpeech;
-  List<Definition> definitions;
-  List<dynamic> synonyms;
-  List<dynamic> antonyms;
-
-  Meaning({
-    required this.partOfSpeech,
-    required this.definitions,
-    required this.synonyms,
-    required this.antonyms,
-  });
-
-  factory Meaning.fromJson(Map<String, dynamic> json) {
-    return Meaning(
-      partOfSpeech: json['partOfSpeech'],
-      definitions: json['definitions']
-              .map<Definition>((def) => Definition.fromJson(def))
-              .toList() ??
-          [],
-      synonyms: json['synonyms'],
-      antonyms: json['antonyms'],
-    );
+  static String _getAudioUrl({required List<WordResponseModel> words}) {
+    String? audio;
+    for (var element in words) {
+      if (element.audioUrl != null) {
+        audio = element.audioUrl;
+      }
+    }
+    return audio!;
   }
-}
 
-class Definition {
-  String definition;
-  List<dynamic> synonyms;
-  List<dynamic> antonyms;
-  String? example;
+  static String _getPheonetic({
+    required List<WordResponseModel> words,
+  }) {
+    String? pheonetic;
 
-  Definition({
-    required this.definition,
-    required this.synonyms,
-    required this.antonyms,
-    this.example,
-  });
-
-  factory Definition.fromJson(Map<String, dynamic> json) {
-    return Definition(
-      definition: json['definition'],
-      synonyms: json['synonyms'],
-      antonyms: json['antonyms'],
-    );
+    for (var element in words) {
+      while (pheonetic == null) {
+        if (element.phonetic != null) {
+          pheonetic = element.phonetic;
+        }
+      }
+    }
+    return pheonetic!;
   }
-}
 
-class Phonetic {
-  String text;
-  String audio;
+  static List<String> _getMeanigns({
+    required List<WordResponseModel> words,
+  }) {
+    var meanings = <String>[];
 
-  Phonetic({
-    required this.text,
-    required this.audio,
-  });
-
-  factory Phonetic.fromJson(Map<String, dynamic> json) {
-    return Phonetic(
-      text: json['text'],
-      audio: json['audio'],
-    );
+    for (var element in words) {
+      for (var meaning in element.meanings) {
+        meanings.add(
+            '${meaning.partOfSpeech} - ${meaning.definitions[0].definition}');
+      }
+    }
+    return meanings;
   }
 }

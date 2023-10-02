@@ -8,19 +8,13 @@ import '../models/models.dart';
 class WordController extends GetxController {
   final _loadingWord = true.obs;
   bool get loadingWord => _loadingWord.value;
-  String _audioUrl = '';
   final DioServices _services = Get.find<DioServices>();
 
   late Word _word;
-  final _wordInfoModel = <WordInfoModel>[].obs;
-  // String get pheonethic => 'Edilson';
-  String get pheonethic => _wordInfoModel
-      .firstWhere((element) => element.phonetic != null)
-      .phonetic!;
-  List<WordInfoModel> get wordInfo => _wordInfoModel.value;
+  final _wordResponseModel = <WordResponseModel>[].obs;
+  late Rx<WordInfoModel> _wordModel;
 
-  Word get currentWord => _word;
-  String get audioUrl => _audioUrl;
+  WordInfoModel get word => _wordModel.value;
 
   WordController() {
     _getWord();
@@ -35,18 +29,22 @@ class WordController extends GetxController {
     try {
       _loadingWord.value = true;
       var response = await _services.getWordInfo(word: word.word);
+      if (response != null) {
+        response.forEach((word) {
+          WordResponseModel info = WordResponseModel.fromJson(word);
+          _wordResponseModel.add(info);
+        });
 
-      response.forEach((word) {
-        WordInfoModel info = WordInfoModel.fromJson(word);
-        _wordInfoModel.add(info);
-      });
+        _buildWordInfos(_wordResponseModel.value);
 
-      _audioUrl = _wordInfoModel.value
-          .firstWhere((element) => element.audioUrl!.isNotEmpty)
-          .audioUrl!;
-      _loadingWord.value = false;
+        _loadingWord.value = false;
+      }
     } catch (e) {
       _loadingWord.value = false;
     }
+  }
+
+  void _buildWordInfos(List<WordResponseModel> words) {
+    _wordModel = Rx(WordInfoModel.fromWordResponse(_word.id, words: words));
   }
 }

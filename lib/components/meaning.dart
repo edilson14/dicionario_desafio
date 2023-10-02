@@ -1,28 +1,35 @@
 import 'package:flutter/widgets.dart';
 
 class MeaningComponent extends StatelessWidget {
-  const MeaningComponent({super.key});
+  final List<String> meaning;
+
+  const MeaningComponent({super.key, required this.meaning});
 
   @override
   Widget build(BuildContext context) {
-    return const Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      mainAxisAlignment: MainAxisAlignment.start,
-      children: [
-        Text(
-          'Meanings',
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
-            fontSize: 30,
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          const Text(
+            'Meanings',
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 30,
+            ),
           ),
-        ),
-        Row(
-          children: [
-            Text('Type - '),
-            Text('definition'),
-          ],
-        ),
-      ],
+          ListView.builder(
+            shrinkWrap: true,
+            itemCount: meaning.length,
+            itemBuilder: (_, index) {
+              String text = meaning[index];
+              return Text(text);
+            },
+          ),
+        ],
+      ),
     );
   }
 }

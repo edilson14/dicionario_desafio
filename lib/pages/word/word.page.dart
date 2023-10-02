@@ -47,7 +47,7 @@ class WordPage extends StatelessWidget {
                         child: Column(
                           children: [
                             Flexible(
-                              flex: 2,
+                              flex: 3,
                               child: SizedBox(
                                 width: MediaQuery.of(context).size.width,
                                 child: Card(
@@ -57,14 +57,14 @@ class WordPage extends StatelessWidget {
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
                                       Text(
-                                        _wordController.currentWord.word,
+                                        _wordController.word.word,
                                         style: AppStyles.wordDetail,
                                       ),
                                       const SizedBox(
                                         height: 20,
                                       ),
                                       Text(
-                                        _wordController.pheonethic,
+                                        _wordController.word.pheonetic,
                                         style: AppStyles.wordDetail,
                                       )
                                     ],
@@ -73,7 +73,7 @@ class WordPage extends StatelessWidget {
                               ),
                             ),
                             Flexible(
-                              flex: 1,
+                              flex: 2,
                               child: Row(
                                 children: [
                                   Obx(
@@ -81,7 +81,7 @@ class WordPage extends StatelessWidget {
                                       iconSize: 50,
                                       onPressed: () =>
                                           _audioController.playAudio(
-                                        audioUrl: _wordController.audioUrl,
+                                        audioUrl: _wordController.word.audiourl,
                                       ),
                                       icon: Icon(
                                         _audioController.audioStatus ==
@@ -99,9 +99,11 @@ class WordPage extends StatelessWidget {
                                 ],
                               ),
                             ),
-                            const Flexible(
-                              flex: 2,
-                              child: MeaningComponent(),
+                            Flexible(
+                              flex: 3,
+                              child: MeaningComponent(
+                                meaning: _wordController.word.meaning,
+                              ),
                             ),
                           ],
                         ),
@@ -127,6 +129,9 @@ class WordPage extends StatelessWidget {
                           ),
                         ],
                       ),
+                      const SizedBox(
+                        height: 50,
+                      )
                     ],
                   ),
           ),
