@@ -1,6 +1,9 @@
+// ignore_for_file: invalid_use_of_protected_member
+
 import 'dart:convert';
 
 import 'package:dicionario_desafio/env/routes.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:get/get.dart';
 
@@ -12,11 +15,13 @@ class WordsController extends GetxController {
   final _words = <Word>[].obs;
   final _currentTabIndex = 0.obs;
   final _pageTitle = 'Lista de Palavras'.obs;
+  final _favoritesWordsId = <int>[].obs;
 
   int get currentTab => _currentTabIndex.value;
   String get pageTitle => _pageTitle.value;
-  // ignore: invalid_use_of_protected_member
   List<Word> get words => _words.value;
+  List<int> get favorites => _favoritesWordsId.value;
+  bool isFavorite(int id) => _favoritesWordsId.contains(id);
 
   WordsController() {
     _loadWords();
@@ -31,6 +36,7 @@ class WordsController extends GetxController {
       (index) => Word(
         id: index,
         word: loadedWords[index],
+        favorite: false,
       ),
     );
   }
@@ -47,5 +53,12 @@ class WordsController extends GetxController {
 
   openDetails({required Word word}) {
     Get.toNamed(AppRoutes.wordDetails, arguments: word);
+  }
+
+  void handleFavorite(BuildContext context, {required Word word}) {
+    word.favorite = !word.favorite;
+
+    _words.value[word.id] = word;
+    _words.refresh();
   }
 }

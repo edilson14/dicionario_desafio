@@ -39,13 +39,26 @@ class WordsListPage extends StatelessWidget {
                   itemBuilder: (_, index) {
                     Word word = controller.words[index];
                     return WordListItemComponent(
+                      handleFavorite: () =>
+                          controller.handleFavorite(context, word: word),
                       ontap: () => controller.openDetails(word: word),
+                      isFavorite: word.favorite,
                       word: word,
                     );
                   },
                 )),
-            // const Icon(Icons.list),
             const Icon(Icons.history),
+            // Obx(
+            //   () => ListView.builder(
+            //     itemCount: ,
+            //     itemBuilder: (_, index) {
+            //       return WordListItemComponent(
+            //           ontap: controller.openDetails(word: word),
+            //           word: word,
+            //           isFavorite: true);
+            //     },
+            //   ),
+            // ),
             const Icon(Icons.favorite),
           ],
         ),

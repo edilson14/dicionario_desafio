@@ -4,10 +4,15 @@ import 'package:flutter/material.dart';
 class WordListItemComponent extends StatelessWidget {
   final Word word;
   final VoidCallback ontap;
+  final VoidCallback handleFavorite;
+  final bool isFavorite;
+
   const WordListItemComponent({
     super.key,
     required this.ontap,
     required this.word,
+    required this.isFavorite,
+    required this.handleFavorite,
   });
 
   @override
@@ -16,7 +21,13 @@ class WordListItemComponent extends StatelessWidget {
       onTap: ontap,
       child: ListTile(
         title: Text(word.word),
-        trailing: const Icon(Icons.favorite_border_outlined),
+        trailing: IconButton(
+          icon: Icon(
+            color: isFavorite ? Colors.red : Colors.grey,
+            isFavorite ? Icons.favorite : Icons.favorite_border_outlined,
+          ),
+          onPressed: handleFavorite,
+        ),
       ),
     );
   }
