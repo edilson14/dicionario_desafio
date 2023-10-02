@@ -1,4 +1,3 @@
->  This is a challenge by [Coodesh](https://coodesh.com/)
 # Mobile Challenge 🏅 2023 - Dictionary
 
 ## Introdução
@@ -44,27 +43,27 @@ Nessa etapa você deverá desenvolver uma aplicação móvel nativa ou hibrida p
 
 **Obrigatório 1** - Você deverá atender aos seguintes casos de uso:
 
-- Como usuário, devo ser capaz de visualizar uma lista de palavras com rolagem infinita
-- Como usuário, devo ser capaz de visualizar uma palavra, significados e a fonética
-- Como usuário, devo ser capaz de salvar a palavra como favorito
-- Como usuário, devo ser capaz de remover a palavra como favorito
-- Como usuário, devo ser capaz de visitar uma lista com as palavras que já vi anteriormente
+- [x] Como usuário, devo ser capaz de visualizar uma lista de palavras com rolagem infinita
+- [x] Como usuário, devo ser capaz de visualizar uma palavra, significados e a fonética
+- [ ] Como usuário, devo ser capaz de salvar a palavra como favorito 
+- [ ] Como usuário, devo ser capaz de remover a palavra como favorito 
+- [ ] Como usuário, devo ser capaz de visitar uma lista com as palavras que já vi anteriormente
 
 A API não possui endpoint com a lista de palavras. Essa lista pode ser carregada em memória ou ser salva em banco de dados local ou remoto (por exemplo, com Firebase). Será necessário usar o [arquivo existente dentro do projeto no Github](https://github.com/dwyl/english-words/blob/master/words_dictionary.json).
 
-**Obrigatório 2** - Salvar em cache o resultado das requisições, para agilizar a resposta em caso de buscas com parâmetros repetidos.
+- [ ] **Obrigatório 2** - Salvar em cache o resultado das requisições, para agilizar a resposta em caso de buscas com parâmetros repetidos.
 
-**Obrigatório 3** - Seguir o wireframe para a página de listagem dos dados. Pode-se alterar a posição dos itens, mantendo as funcionalidades solicitadas.
+- [ ] **Obrigatório 3** - Seguir o wireframe para a página de listagem dos dados. Pode-se alterar a posição dos itens, mantendo as funcionalidades solicitadas. [x]
 
 <img src="./img/wireframe.png" width="100%" />
 
-**Diferencial 1** - Implementar um tocador de audio utilizando, por exemplo, https://responsivevoice.org/api ou recursos nativos;
+- [x] **Diferencial 1** - Implementar um tocador de audio utilizando, por exemplo, https://responsivevoice.org/api ou recursos nativos;
 
-**Diferencial 2** - Utilizar alguma ferramenta de Injeção de Dependência;
+- [x] **Diferencial 2** - Utilizar alguma ferramenta de Injeção de Dependência;
 
-**Diferencial 3** - Escrever Unit Tests ou E2E Test. Escolher a melhor abordagem e biblioteca;
+- [ ] **Diferencial 3** - Escrever Unit Tests ou E2E Test. Escolher a melhor abordagem e biblioteca;
 
-**Diferencial 4** - Implementar login com usuário e senha e associar os favoritos e histórico ao ID do usuário, salvando essa informação em banco de dados local ou remoto
+- [ ] **Diferencial 4** - Implementar login com usuário e senha e associar os favoritos e histórico ao ID do usuário, salvando essa informação em banco de dados local ou remoto
 
 ## Readme do Repositório
 
