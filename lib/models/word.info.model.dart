@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'models.dart';
 
 class WordInfoModel {
@@ -5,14 +7,14 @@ class WordInfoModel {
   String word;
   String audiourl;
   String pheonetic;
-  List<String> meaning;
+  List<String> meanings;
 
   WordInfoModel({
     required this.id,
     required this.word,
     required this.audiourl,
     required this.pheonetic,
-    required this.meaning,
+    required this.meanings,
   });
 
   factory WordInfoModel.fromWordResponse(
@@ -24,7 +26,22 @@ class WordInfoModel {
       audiourl: _getAudioUrl(words: words),
       word: words[0].word,
       pheonetic: _getPheonetic(words: words),
-      meaning: _getMeanigns(words: words),
+      meanings: _getMeanigns(words: words),
+    );
+  }
+
+  factory WordInfoModel.fromDataBase(Map dataBase) {
+    var meanings = <String>[];
+    jsonDecode(dataBase['meanings']).forEach((meaning) {
+      meanings.add(meaning);
+    });
+
+    return WordInfoModel(
+      id: dataBase['id'],
+      word: dataBase['word'],
+      audiourl: dataBase['audiourl'],
+      pheonetic: dataBase['pheonetic'],
+      meanings: meanings,
     );
   }
 
@@ -65,5 +82,15 @@ class WordInfoModel {
       }
     }
     return meanings;
+  }
+
+  Map<String, dynamic> toMap() {
+    return {
+      'id': id,
+      'word': word,
+      'audiourl': audiourl,
+      'pheonetic': pheonetic,
+      'meanings': jsonEncode(meanings)
+    };
   }
 }

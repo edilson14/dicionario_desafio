@@ -2,6 +2,8 @@ import 'package:dicionario_desafio/env/env.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import 'bindings/app.binding.dart';
+
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   runApp(const MyApp());
@@ -21,6 +23,7 @@ class MyApp extends StatelessWidget {
       ),
       getPages: AppPages.pages,
       initialRoute: AppRoutes.initialPage,
+      initialBinding: AppBindings(),
     );
   }
 }

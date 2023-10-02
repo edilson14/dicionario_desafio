@@ -102,7 +102,7 @@ class WordPage extends StatelessWidget {
                             Flexible(
                               flex: 3,
                               child: MeaningComponent(
-                                meaning: _wordController.word.meaning,
+                                meaning: _wordController.word.meanings,
                               ),
                             ),
                           ],

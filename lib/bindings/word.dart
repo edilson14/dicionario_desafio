@@ -1,4 +1,4 @@
-import 'package:dicionario_desafio/api/api.dart';
+import 'package:dicionario_desafio/services/services.dart';
 import 'package:get/get.dart';
 
 import '../controllers/controllers.dart';
