@@ -80,11 +80,6 @@ class WordPage extends StatelessWidget {
                                                   : Icons.play_arrow,
                                             ),
                                           ),
-                                          Slider(
-                                            value: 0,
-                                            max: 0.1,
-                                            onChanged: (double value) {},
-                                          )
                                         ],
                                       )
                                     : const Center(

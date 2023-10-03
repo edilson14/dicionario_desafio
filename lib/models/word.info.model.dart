@@ -72,7 +72,7 @@ class WordInfoModel {
         }
       }
     }
-    return pheonetic!;
+    return pheonetic == 'null' ? 'Não possui - fonetica' : pheonetic!;
   }
 
   static List<String> _getMeanigns({

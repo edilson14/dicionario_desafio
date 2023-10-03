@@ -38,7 +38,9 @@ class WordController extends GetxController {
       _loadWordInfo(_word);
     } else {
       _wordModel = Rx(wordInfoModel);
-      _audioPlayer.setUrl(_wordModel.value.audiourl);
+      if (_wordModel.value.audiourl.isNotEmpty) {
+        await _audioPlayer.setUrl(_wordModel.value.audiourl);
+      }
       _loadingWord.value = false;
     }
   }
@@ -62,7 +64,7 @@ class WordController extends GetxController {
     }
   }
 
-  void _buildWordInfos(List<WordResponseModel> words) {
+  void _buildWordInfos(List<WordResponseModel> words) async {
     _wordModel = Rx(
       WordInfoModel.fromWordResponse(
         _word.id,
@@ -70,7 +72,9 @@ class WordController extends GetxController {
         words: words,
       ),
     );
-    _audioPlayer.setUrl(_wordModel.value.audiourl);
+    if (_wordModel.value.audiourl.isNotEmpty) {
+      await _audioPlayer.setUrl(_wordModel.value.audiourl);
+    }
     _dataBaseServices.saveWord(_wordModel.value);
   }
 
@@ -79,6 +83,7 @@ class WordController extends GetxController {
     _audioPlayer.play().whenComplete(
       () {
         _audioStatus.value = AudioStatus.paused;
+        _audioPlayer.seek(Duration.zero);
       },
     );
   }
