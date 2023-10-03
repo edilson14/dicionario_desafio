@@ -8,6 +8,5 @@ class WordBinding implements Bindings {
   void dependencies() {
     Get.lazyPut(() => DioServices());
     Get.lazyPut(() => WordController());
-    Get.lazyPut(() => AudioController());
   }
 }

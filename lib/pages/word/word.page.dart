@@ -1,6 +1,5 @@
 import 'package:dicionario_desafio/components/components.dart';
-import 'package:dicionario_desafio/controllers/audio.controller.dart';
-import 'package:dicionario_desafio/controllers/word.controller.dart';
+import 'package:dicionario_desafio/controllers/controllers.dart';
 import 'package:dicionario_desafio/styles/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -8,7 +7,6 @@ import 'package:get/get.dart';
 class WordPage extends StatelessWidget {
   WordPage({super.key});
 
-  final AudioController _audioController = Get.find();
   final WordController _wordController = Get.find();
 
   @override
@@ -74,12 +72,9 @@ class WordPage extends StatelessWidget {
                                           IconButton(
                                             iconSize: 50,
                                             onPressed: () =>
-                                                _audioController.playAudio(
-                                              audioUrl:
-                                                  _wordController.word.audiourl,
-                                            ),
+                                                _wordController.playAudio(),
                                             icon: Icon(
-                                              _audioController.audioStatus ==
+                                              _wordController.audioStatus ==
                                                       AudioStatus.playing
                                                   ? Icons.pause
                                                   : Icons.play_arrow,

@@ -2,8 +2,11 @@
 
 import 'package:dicionario_desafio/services/services.dart';
 import 'package:get/get.dart';
+import 'package:just_audio/just_audio.dart';
 
 import '../models/models.dart';
+
+enum AudioStatus { playing, paused }
 
 class WordController extends GetxController {
   final _loadingWord = true.obs;
@@ -15,6 +18,11 @@ class WordController extends GetxController {
   late Word _word;
   final _wordResponseModel = <WordResponseModel>[].obs;
   late Rx<WordInfoModel> _wordModel;
+
+  final _audioStatus = AudioStatus.paused.obs;
+  final _audioPlayer = AudioPlayer();
+
+  AudioStatus get audioStatus => _audioStatus.value;
 
   WordInfoModel get word => _wordModel.value;
 
@@ -30,6 +38,7 @@ class WordController extends GetxController {
       _loadWordInfo(_word);
     } else {
       _wordModel = Rx(wordInfoModel);
+      _audioPlayer.setUrl(_wordModel.value.audiourl);
       _loadingWord.value = false;
     }
   }
@@ -61,6 +70,16 @@ class WordController extends GetxController {
         words: words,
       ),
     );
+    _audioPlayer.setUrl(_wordModel.value.audiourl);
     _dataBaseServices.saveWord(_wordModel.value);
+  }
+
+  void playAudio() {
+    _audioStatus.value = AudioStatus.playing;
+    _audioPlayer.play().whenComplete(
+      () {
+        _audioStatus.value = AudioStatus.paused;
+      },
+    );
   }
 }
