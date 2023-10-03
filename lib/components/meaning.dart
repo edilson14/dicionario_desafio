@@ -25,7 +25,15 @@ class MeaningComponent extends StatelessWidget {
             itemCount: meaning.length,
             itemBuilder: (_, index) {
               String text = meaning[index];
-              return Text(text);
+              return Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(text),
+                  const SizedBox(
+                    height: 10,
+                  )
+                ],
+              );
             },
           ),
         ],

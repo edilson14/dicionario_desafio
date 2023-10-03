@@ -34,13 +34,6 @@ class WordPage extends StatelessWidget {
                             ),
                             onPressed: () => Get.back(),
                           ),
-                          IconButton(
-                            icon: const Icon(
-                              Icons.favorite,
-                              semanticLabel: 'Marcar como favorito',
-                            ),
-                            onPressed: () => Get.back(),
-                          ),
                         ],
                       ),
                       Expanded(
@@ -73,34 +66,43 @@ class WordPage extends StatelessWidget {
                               ),
                             ),
                             Flexible(
-                              flex: 2,
-                              child: Row(
-                                children: [
-                                  Obx(
-                                    () => IconButton(
-                                      iconSize: 50,
-                                      onPressed: () =>
-                                          _audioController.playAudio(
-                                        audioUrl: _wordController.word.audiourl,
+                              flex: 1,
+                              child: Obx(
+                                () => _wordController.word.audiourl.isNotEmpty
+                                    ? Row(
+                                        children: [
+                                          IconButton(
+                                            iconSize: 50,
+                                            onPressed: () =>
+                                                _audioController.playAudio(
+                                              audioUrl:
+                                                  _wordController.word.audiourl,
+                                            ),
+                                            icon: Icon(
+                                              _audioController.audioStatus ==
+                                                      AudioStatus.playing
+                                                  ? Icons.pause
+                                                  : Icons.play_arrow,
+                                            ),
+                                          ),
+                                          Slider(
+                                            value: 0,
+                                            max: 0.1,
+                                            onChanged: (double value) {},
+                                          )
+                                        ],
+                                      )
+                                    : const Center(
+                                        child: Text(
+                                          'Não possui audio',
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.bold),
+                                        ),
                                       ),
-                                      icon: Icon(
-                                        _audioController.audioStatus ==
-                                                AudioStatus.playing
-                                            ? Icons.pause
-                                            : Icons.play_arrow,
-                                      ),
-                                    ),
-                                  ),
-                                  Slider(
-                                    value: 0,
-                                    max: 0.1,
-                                    onChanged: (double value) {},
-                                  )
-                                ],
                               ),
                             ),
                             Flexible(
-                              flex: 3,
+                              flex: 0,
                               child: MeaningComponent(
                                 meaning: _wordController.word.meanings,
                               ),
@@ -129,9 +131,6 @@ class WordPage extends StatelessWidget {
                           ),
                         ],
                       ),
-                      const SizedBox(
-                        height: 50,
-                      )
                     ],
                   ),
           ),

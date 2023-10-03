@@ -8,6 +8,7 @@ class WordInfoModel {
   String audiourl;
   String pheonetic;
   List<String> meanings;
+  bool isFavorite;
 
   WordInfoModel({
     required this.id,
@@ -15,10 +16,12 @@ class WordInfoModel {
     required this.audiourl,
     required this.pheonetic,
     required this.meanings,
+    required this.isFavorite,
   });
 
   factory WordInfoModel.fromWordResponse(
-    int id, {
+    int id,
+    bool isFavorite, {
     required List<WordResponseModel> words,
   }) {
     return WordInfoModel(
@@ -27,6 +30,7 @@ class WordInfoModel {
       word: words[0].word,
       pheonetic: _getPheonetic(words: words),
       meanings: _getMeanigns(words: words),
+      isFavorite: isFavorite,
     );
   }
 
@@ -42,6 +46,7 @@ class WordInfoModel {
       audiourl: dataBase['audiourl'],
       pheonetic: dataBase['pheonetic'],
       meanings: meanings,
+      isFavorite: dataBase['isFavorite'] == 1 ? true : false,
     );
   }
 
@@ -52,7 +57,7 @@ class WordInfoModel {
         audio = element.audioUrl;
       }
     }
-    return audio!;
+    return audio ?? '';
   }
 
   static String _getPheonetic({
@@ -90,7 +95,8 @@ class WordInfoModel {
       'word': word,
       'audiourl': audiourl,
       'pheonetic': pheonetic,
-      'meanings': jsonEncode(meanings)
+      'meanings': jsonEncode(meanings),
+      'isFavorite': isFavorite ? 1 : 0,
     };
   }
 }

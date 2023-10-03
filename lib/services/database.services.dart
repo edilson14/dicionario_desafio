@@ -6,6 +6,7 @@ import 'services.dart';
 
 const String dataBaseName = 'dicionario.db';
 const String wordTable = 'Words';
+const String favoritesTable = 'favoritesTable';
 
 class DataBaseServices {
   late Database _database;
@@ -21,6 +22,7 @@ class DataBaseServices {
       join(dataBasePath, dataBaseName),
       onCreate: (database, version) async {
         await database.execute(DataBaseQuerys.createWordTable);
+        await database.execute(DataBaseQuerys.createFavoriteTable);
       },
       version: 1,
     );
@@ -38,5 +40,33 @@ class DataBaseServices {
     List<Map> word =
         await db.query(wordTable, where: 'id = ?', whereArgs: [wordId]);
     return word.isNotEmpty ? WordInfoModel.fromDataBase(word[0]) : null;
+  }
+
+  Future<void> addFavorite(Word word) async {
+    final db = _database;
+    await db.insert(favoritesTable, word.toMap());
+  }
+
+  Future<void> deleteFavorite(Word word) async {
+    var db = _database;
+    await db.delete(
+      favoritesTable,
+      where: 'id = ?',
+      whereArgs: [word.id],
+    );
+  }
+
+  Future<List<Word>> getFavoritesWords() async {
+    var words = <Word>[];
+    final db = _database;
+    List<Map> favorites = await db.query(favoritesTable);
+
+    for (var element in favorites) {
+      words.add(
+        Word.fromDataBase(element),
+      );
+    }
+
+    return words;
   }
 }

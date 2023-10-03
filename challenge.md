@@ -45,8 +45,8 @@ Nessa etapa você deverá desenvolver uma aplicação móvel nativa ou hibrida p
 
 - [x] Como usuário, devo ser capaz de visualizar uma lista de palavras com rolagem infinita
 - [x] Como usuário, devo ser capaz de visualizar uma palavra, significados e a fonética
-- [ ] Como usuário, devo ser capaz de salvar a palavra como favorito 
-- [ ] Como usuário, devo ser capaz de remover a palavra como favorito 
+- [x] Como usuário, devo ser capaz de salvar a palavra como favorito 
+- [x] Como usuário, devo ser capaz de remover a palavra como favorito 
 - [ ] Como usuário, devo ser capaz de visitar uma lista com as palavras que já vi anteriormente
 
 A API não possui endpoint com a lista de palavras. Essa lista pode ser carregada em memória ou ser salva em banco de dados local ou remoto (por exemplo, com Firebase). Será necessário usar o [arquivo existente dentro do projeto no Github](https://github.com/dwyl/english-words/blob/master/words_dictionary.json).

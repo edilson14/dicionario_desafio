@@ -48,18 +48,22 @@ class WordsListPage extends StatelessWidget {
                   },
                 )),
             const Icon(Icons.history),
-            // Obx(
-            //   () => ListView.builder(
-            //     itemCount: ,
-            //     itemBuilder: (_, index) {
-            //       return WordListItemComponent(
-            //           ontap: controller.openDetails(word: word),
-            //           word: word,
-            //           isFavorite: true);
-            //     },
-            //   ),
-            // ),
-            const Icon(Icons.favorite),
+            Obx(
+              () => ListView.builder(
+                itemCount: controller.favorites.length,
+                itemBuilder: (_, index) {
+                  Word word = controller.favorites[index];
+                  return WordListItemComponent(
+                    ontap: () => controller.openDetails(word: word),
+                    word: word,
+                    isFavorite: true,
+                    handleFavorite: () =>
+                        controller.handleFavorite(context, word: word),
+                  );
+                },
+              ),
+            ),
+            // const Icon(Icons.favorite),
           ],
         ),
       ),

@@ -3,6 +3,7 @@
 import 'dart:convert';
 
 import 'package:dicionario_desafio/env/routes.dart';
+import 'package:dicionario_desafio/services/services.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:get/get.dart';
@@ -13,15 +14,16 @@ const String wordsPath = 'assets/english_words.json';
 
 class WordsController extends GetxController {
   final _words = <Word>[].obs;
+  final _favoritesWords = <Word>[].obs;
   final _currentTabIndex = 0.obs;
   final _pageTitle = 'Lista de Palavras'.obs;
-  final _favoritesWordsId = <int>[].obs;
 
   int get currentTab => _currentTabIndex.value;
   String get pageTitle => _pageTitle.value;
   List<Word> get words => _words.value;
-  List<int> get favorites => _favoritesWordsId.value;
-  bool isFavorite(int id) => _favoritesWordsId.contains(id);
+  List<Word> get favorites => _favoritesWords.value;
+
+  final DataBaseServices _dataBaseServices = Get.find<DataBaseServices>();
 
   WordsController() {
     _loadWords();
@@ -39,6 +41,8 @@ class WordsController extends GetxController {
         favorite: false,
       ),
     );
+
+    _getFavorites();
   }
 
   void handleTabIndexChange(int index) {
@@ -48,6 +52,7 @@ class WordsController extends GetxController {
       1: 'Historico de Palavras',
       2: 'Palavras Favoritas'
     };
+
     _pageTitle.value = titles[index]!;
   }
 
@@ -57,8 +62,24 @@ class WordsController extends GetxController {
 
   void handleFavorite(BuildContext context, {required Word word}) {
     word.favorite = !word.favorite;
+    if (word.favorite) {
+      _dataBaseServices.addFavorite(word);
+      _getFavorites();
+    } else {
+      _dataBaseServices.deleteFavorite(word);
+      _getFavorites();
+    }
 
     _words.value[word.id] = word;
+    _words.refresh();
+  }
+
+  Future<void> _getFavorites() async {
+    _favoritesWords.value = await _dataBaseServices.getFavoritesWords();
+
+    for (var element in _favoritesWords.value) {
+      _words.value[element.id].favorite = true;
+    }
     _words.refresh();
   }
 }

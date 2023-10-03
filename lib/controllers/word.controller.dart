@@ -55,7 +55,11 @@ class WordController extends GetxController {
 
   void _buildWordInfos(List<WordResponseModel> words) {
     _wordModel = Rx(
-      WordInfoModel.fromWordResponse(_word.id, words: words),
+      WordInfoModel.fromWordResponse(
+        _word.id,
+        _word.favorite,
+        words: words,
+      ),
     );
     _dataBaseServices.saveWord(_wordModel.value);
   }
