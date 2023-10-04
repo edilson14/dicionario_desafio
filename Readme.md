@@ -8,6 +8,7 @@
 ## Tecnologias Utilizadas
 - Framework [Flutter](https://flutter.dev/)
 - [Getx](https://pub.dev/packages/get) para gerenciamento de estado e injeção de dependencias e rotas
+- [SqFlite](https://pub.dev/packages/sqflite) como banco de dados 
 
 
 ## Como executar
@@ -22,5 +23,5 @@
 -  Foi adicionado uma página para quando a palavra não for encontrada (mensagem que exibe na pagina é a mesma que a api informa)
 -  A lógica de historico de palavras foi baseada , somente nas palavras que foram encontradas os segnificados
 -  Caso nao exista algum campo nas palavras pesquisada , é mostrado uma mensagem deixando o usuario ciente
- 
+-  Os segnificados estão associados com uma preposição
 

@@ -1,5 +1,6 @@
 // ignore_for_file: invalid_use_of_protected_member
 
+import 'package:dicionario_desafio/controllers/words.controller.dart';
 import 'package:dicionario_desafio/services/services.dart';
 import 'package:get/get.dart';
 import 'package:just_audio/just_audio.dart';
@@ -14,6 +15,8 @@ class WordController extends GetxController {
   final DioServices _services = Get.find<DioServices>();
 
   final DataBaseServices _dataBaseServices = Get.find<DataBaseServices>();
+  final WordsController _wordsController = Get.find<WordsController>();
+  bool get canNavigateNext => _word.id < _wordsController.words.length;
 
   late Word _word;
   final _wordResponseModel = <WordResponseModel>[].obs;
@@ -31,7 +34,12 @@ class WordController extends GetxController {
   }
 
   void _getWord({Word? word}) async {
-    if (word == null) _word = Get.arguments;
+    _loadingWord.value = true;
+    if (word == null) {
+      _word = Get.arguments;
+    } else {
+      _word = word;
+    }
 
     WordInfoModel? wordInfoModel =
         await _dataBaseServices.getWordById(wordId: _word.id);
@@ -87,5 +95,21 @@ class WordController extends GetxController {
         _audioPlayer.seek(Duration.zero);
       },
     );
+  }
+
+  void handleNavigation({next = true}) {
+    Word navigatioWord;
+    if (next) {
+      int wordId = word.id + 1;
+      navigatioWord = _wordsController.words.firstWhere(
+        (element) => element.id == wordId,
+      );
+    } else {
+      navigatioWord = _wordsController.words.firstWhere(
+        (element) => element.id == (word.id - 1),
+      );
+    }
+
+    _getWord(word: navigatioWord);
   }
 }

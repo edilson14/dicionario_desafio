@@ -105,7 +105,10 @@ class WordPage extends StatelessWidget {
                         children: [
                           TextButton(
                             style: AppStyles.buttonStyle,
-                            onPressed: () => Navigator.of(context).pop(),
+                            onPressed: _wordController.word.id != 0
+                                ? () => _wordController.handleNavigation(
+                                    next: false)
+                                : null,
                             child: Text(
                               'Voltar',
                               style: AppStyles.textStyleButton,
@@ -113,7 +116,9 @@ class WordPage extends StatelessWidget {
                           ),
                           TextButton(
                             style: AppStyles.buttonStyle,
-                            onPressed: () {},
+                            onPressed: _wordController.canNavigateNext
+                                ? () => _wordController.handleNavigation()
+                                : null,
                             child: Text(
                               'Próximo',
                               style: AppStyles.textStyleButton,
