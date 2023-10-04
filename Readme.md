@@ -24,4 +24,5 @@
 -  A lógica de historico de palavras foi baseada , somente nas palavras que foram encontradas os segnificados
 -  Caso nao exista algum campo nas palavras pesquisada , é mostrado uma mensagem deixando o usuario ciente
 -  Os segnificados estão associados com uma preposição
+-  Os dados estão sendo salvos usando SqFlite
 
