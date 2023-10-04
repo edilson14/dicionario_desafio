@@ -16,5 +16,11 @@
 3. Na  raiz do repositorio executar ```flutter pub get```
 4. Ainda na raiz com emulador aberto ou celular conetcado executar ```flutter run```
 5. Caso tenha algum problema ou duvida como configurar o emulador ou celular ler a [documentação](https://docs.flutter.dev/get-started/install/linux#set-up-your-android-device)
+
+
+### Observações
+-  Foi adicionado uma página para quando a palavra não for encontrada (mensagem que exibe na pagina é a mesma que a api informa)
+-  A lógica de historico de palavras foi baseada , somente nas palavras que foram encontradas os segnificados
+-  Caso nao exista algum campo nas palavras pesquisada , é mostrado uma mensagem deixando o usuario ciente
  
 

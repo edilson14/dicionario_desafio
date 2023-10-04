@@ -17,11 +17,13 @@ class WordsController extends GetxController {
   final _favoritesWords = <Word>[].obs;
   final _currentTabIndex = 0.obs;
   final _pageTitle = 'Lista de Palavras'.obs;
+  final _recentWords = <Word>[].obs;
 
   int get currentTab => _currentTabIndex.value;
   String get pageTitle => _pageTitle.value;
   List<Word> get words => _words.value;
   List<Word> get favorites => _favoritesWords.value;
+  List<Word> get recentWords => _recentWords.value;
 
   final DataBaseServices _dataBaseServices = Get.find<DataBaseServices>();
 
@@ -43,6 +45,7 @@ class WordsController extends GetxController {
     );
 
     _getFavorites();
+    _getRecentlyWords();
   }
 
   void handleTabIndexChange(int index) {
@@ -81,5 +84,9 @@ class WordsController extends GetxController {
       _words.value[element.id].favorite = true;
     }
     _words.refresh();
+  }
+
+  Future<void> _getRecentlyWords() async {
+    _recentWords.value = await _dataBaseServices.getSavedWords();
   }
 }

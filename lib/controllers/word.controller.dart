@@ -30,8 +30,9 @@ class WordController extends GetxController {
     _getWord();
   }
 
-  void _getWord() async {
-    _word = Get.arguments;
+  void _getWord({Word? word}) async {
+    if (word == null) _word = Get.arguments;
+
     WordInfoModel? wordInfoModel =
         await _dataBaseServices.getWordById(wordId: _word.id);
     if (wordInfoModel == null) {

@@ -35,6 +35,24 @@ class DataBaseServices {
     );
   }
 
+  Future<List<Word>> getSavedWords() async {
+    var words = <Word>[];
+    var db = _database;
+
+    List<Map> savedWords = await db.query(wordTable);
+
+    for (var word in savedWords) {
+      words.add(
+        Word(
+          id: word['id'],
+          word: word['word'],
+          favorite: word['isFavorite'] == 1 ? true : false,
+        ),
+      );
+    }
+    return words;
+  }
+
   Future<WordInfoModel?> getWordById({required int wordId}) async {
     final db = _database;
     List<Map> word =

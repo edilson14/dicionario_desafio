@@ -34,20 +34,47 @@ class WordsListPage extends StatelessWidget {
         ),
         body: TabBarView(
           children: [
-            Obx(() => ListView.builder(
-                  itemCount: controller.words.length,
-                  itemBuilder: (_, index) {
-                    Word word = controller.words[index];
-                    return WordListItemComponent(
-                      handleFavorite: () =>
-                          controller.handleFavorite(context, word: word),
-                      ontap: () => controller.openDetails(word: word),
-                      isFavorite: word.favorite,
-                      word: word,
-                    );
-                  },
-                )),
-            const Icon(Icons.history),
+            Obx(
+              () => ListView.builder(
+                itemCount: controller.words.length,
+                itemBuilder: (_, index) {
+                  Word word = controller.words[index];
+                  return WordListItemComponent(
+                    handleFavorite: () =>
+                        controller.handleFavorite(context, word: word),
+                    ontap: () => controller.openDetails(word: word),
+                    isFavorite: word.favorite,
+                    word: word,
+                  );
+                },
+              ),
+            ),
+            Obx(
+              () => ListView.builder(
+                itemCount: controller.recentWords.length,
+                itemBuilder: (_, index) {
+                  Word word = controller.recentWords[index];
+                  return controller.recentWords.isEmpty
+                      ? const Center(
+                          child:
+                              Text('nenhuma palavra visualizada recentemente'),
+                        )
+                      : InkWell(
+                          onTap: () => controller.openDetails(word: word),
+                          child: ListTile(
+                            title: Text(word.word),
+                            trailing: Icon(
+                              color: word.favorite ? Colors.red : null,
+                              word.favorite
+                                  ? Icons.favorite
+                                  : Icons.favorite_border,
+                            ),
+                          ),
+                        );
+                },
+              ),
+            ),
+            // const Icon(Icons.history),
             Obx(
               () => ListView.builder(
                 itemCount: controller.favorites.length,
