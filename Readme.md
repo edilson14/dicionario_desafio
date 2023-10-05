@@ -26,3 +26,4 @@
 -  Os segnificados estão associados com uma preposição
 -  Os dados estão sendo salvos usando SqFlite
 
+[Video da Apresentação](https://www.loom.com/share/53c8ec8a1b6846d5b2bcdae4908d2a5c?sid=6a0c6215-00d5-4149-9845-e36a5b875a85)

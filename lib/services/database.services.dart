@@ -11,10 +11,6 @@ const String favoritesTable = 'favoritesTable';
 class DataBaseServices {
   late Database _database;
 
-  // DataBaseServices() {
-  //   initialize();
-  // }
-
   Future<void> initialize() async {
     final String dataBasePath = await getDatabasesPath();
 

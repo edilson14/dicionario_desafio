@@ -49,6 +49,7 @@ class WordsController extends GetxController {
   }
 
   void handleTabIndexChange(int index) {
+    if (index == 1) _getRecentlyWords();
     _currentTabIndex.value = index;
     const Map<int, String> titles = {
       0: 'Lista de Palavras',
