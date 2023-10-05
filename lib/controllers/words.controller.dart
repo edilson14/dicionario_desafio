@@ -43,7 +43,7 @@ class WordsController extends GetxController {
         favorite: false,
       ),
     );
-
+    await _dataBaseServices.initialize();
     _getFavorites();
     _getRecentlyWords();
   }

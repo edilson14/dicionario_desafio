@@ -1,8 +1,7 @@
+import 'package:dicionario_desafio/bindings/binding.dart';
 import 'package:dicionario_desafio/env/env.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-import 'bindings/app.binding.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -17,13 +16,13 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       title: 'Dicionario',
+      initialBinding: AppBindings(),
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.grey),
         useMaterial3: true,
       ),
       getPages: AppPages.pages,
       initialRoute: AppRoutes.initialPage,
-      initialBinding: AppBindings(),
     );
   }
 }
