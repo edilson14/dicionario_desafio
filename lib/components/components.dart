@@ -1,2 +1,2 @@
-export 'wordlist.widget.dart';
-export 'meaning.dart';
+export 'wordlist_widget.dart';
+export 'meaning_widget.dart';

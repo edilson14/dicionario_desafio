@@ -16,15 +16,11 @@ class WordResponseModel {
   });
 
   factory WordResponseModel.fromJson(Map<String, dynamic> json) {
-    List<Phonetic> pheonethics = json['phonetics']
-            .map<Phonetic>((pheonetic) => Phonetic.fromJson(pheonetic))
-            .toList() ??
-        [];
+    List<Phonetic> pheonethics =
+        json['phonetics'].map<Phonetic>((pheonetic) => Phonetic.fromJson(pheonetic)).toList() ?? [];
 
-    List<Meaning> meanings = json['meanings']
-            .map<Meaning>((def) => Meaning.fromJson(def))
-            .toList() ??
-        [];
+    List<Meaning> meanings =
+        json['meanings'].map<Meaning>((def) => Meaning.fromJson(def)).toList() ?? [];
 
     return WordResponseModel(
       word: json['word'],
@@ -52,10 +48,8 @@ class Meaning {
   factory Meaning.fromJson(Map<String, dynamic> json) {
     return Meaning(
       partOfSpeech: json['partOfSpeech'],
-      definitions: json['definitions']
-              .map<Definition>((def) => Definition.fromJson(def))
-              .toList() ??
-          [],
+      definitions:
+          json['definitions'].map<Definition>((def) => Definition.fromJson(def)).toList() ?? [],
     );
   }
 }

@@ -1,6 +1,6 @@
 // ignore_for_file: invalid_use_of_protected_member
 
-import 'package:dicionario_desafio/controllers/words.controller.dart';
+import 'package:dicionario_desafio/controllers/words_controller.dart';
 import 'package:dicionario_desafio/services/services.dart';
 import 'package:get/get.dart';
 import 'package:just_audio/just_audio.dart';

@@ -1,3 +1,3 @@
-export 'word.response.model.dart';
-export 'word.dart';
-export 'word.info.model.dart';
+export 'word_response_model.dart';
+export 'word_model.dart';
+export 'word._nfo_model.dart';

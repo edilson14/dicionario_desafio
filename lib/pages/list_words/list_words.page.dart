@@ -1,5 +1,5 @@
-import 'package:dicionario_desafio/components/wordlist.widget.dart';
-import 'package:dicionario_desafio/controllers/words.controller.dart';
+import 'package:dicionario_desafio/components/wordlist_widget.dart';
+import 'package:dicionario_desafio/controllers/words_controller.dart';
 import 'package:dicionario_desafio/models/models.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -74,7 +74,6 @@ class WordsListPage extends StatelessWidget {
                 },
               ),
             ),
-            // const Icon(Icons.history),
             Obx(
               () => ListView.builder(
                 itemCount: controller.favorites.length,
@@ -90,7 +89,6 @@ class WordsListPage extends StatelessWidget {
                 },
               ),
             ),
-            // const Icon(Icons.favorite),
           ],
         ),
       ),

@@ -1,4 +1,4 @@
-import 'package:dicionario_desafio/services/database.services.dart';
+import 'package:dicionario_desafio/services/database_services.dart';
 import 'package:get/get.dart';
 
 class AppBindings implements Bindings {

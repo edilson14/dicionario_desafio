@@ -36,6 +36,7 @@ class WordInfoModel {
 
   factory WordInfoModel.fromDataBase(Map dataBase) {
     var meanings = <String>[];
+    //usar o for in
     jsonDecode(dataBase['meanings']).forEach((meaning) {
       meanings.add(meaning);
     });
@@ -82,8 +83,7 @@ class WordInfoModel {
 
     for (var element in words) {
       for (var meaning in element.meanings) {
-        meanings.add(
-            '${meaning.partOfSpeech} - ${meaning.definitions[0].definition}');
+        meanings.add('${meaning.partOfSpeech} - ${meaning.definitions[0].definition}');
       }
     }
     return meanings;
