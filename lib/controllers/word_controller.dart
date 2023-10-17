@@ -99,14 +99,16 @@ class WordController extends GetxController {
 
   void handleNavigation({next = true}) {
     Word navigatioWord;
+    int wordId;
     if (next) {
-      int wordId = word.id + 1;
+      wordId = word.id + 1;
       navigatioWord = _wordsController.words.firstWhere(
         (element) => element.id == wordId,
       );
     } else {
+      wordId = word.id - 1;
       navigatioWord = _wordsController.words.firstWhere(
-        (element) => element.id == (word.id - 1),
+        (element) => element.id == wordId,
       );
     }
 

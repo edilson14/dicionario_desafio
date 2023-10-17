@@ -1,15 +1,15 @@
-import 'package:dicionario_desafio/models/models.dart';
 import 'package:flutter/material.dart';
+import 'package:dicionario_desafio/models/models.dart';
 
 class WordListItemComponent extends StatelessWidget {
   final Word word;
-  final VoidCallback ontap;
+  final VoidCallback onTap;
   final VoidCallback handleFavorite;
   final bool isFavorite;
 
   const WordListItemComponent({
     super.key,
-    required this.ontap,
+    required this.onTap,
     required this.word,
     required this.isFavorite,
     required this.handleFavorite,
@@ -18,7 +18,7 @@ class WordListItemComponent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: ontap,
+      onTap: onTap,
       child: ListTile(
         title: Text(word.word),
         trailing: IconButton(
