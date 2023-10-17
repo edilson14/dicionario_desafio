@@ -1,5 +1,6 @@
 import 'package:dicionario_desafio/bindings/binding.dart';
 import 'package:dicionario_desafio/env/env.dart';
+import 'package:dicionario_desafio/styles/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -16,10 +17,7 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       title: 'Dicionario',
       initialBinding: AppBindings(),
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.grey),
-        useMaterial3: true,
-      ),
+      theme: appTheme,
       getPages: AppPages.pages,
       initialRoute: AppRoutes.initialPage,
     );
