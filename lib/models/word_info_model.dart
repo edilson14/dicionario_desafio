@@ -35,11 +35,7 @@ class WordInfoModel {
   }
 
   factory WordInfoModel.fromDataBase(Map dataBase) {
-    var meanings = <String>[];
-    //usar o for in
-    jsonDecode(dataBase['meanings']).forEach((meaning) {
-      meanings.add(meaning);
-    });
+    var meanings = List<String>.from(jsonDecode(dataBase['meanings']) ?? []);
 
     return WordInfoModel(
       id: dataBase['id'],
@@ -83,7 +79,8 @@ class WordInfoModel {
 
     for (var element in words) {
       for (var meaning in element.meanings) {
-        meanings.add('${meaning.partOfSpeech} - ${meaning.definitions[0].definition}');
+        meanings.add(
+            '${meaning.partOfSpeech} - ${meaning.definitions[0].definition}');
       }
     }
     return meanings;
@@ -96,7 +93,7 @@ class WordInfoModel {
       'audiourl': audiourl,
       'pheonetic': pheonetic,
       'meanings': jsonEncode(meanings),
-      'isFavorite': isFavorite ? 1 : 0,
+      'isFavorite': isFavorite ? 1 : 0, // database can't save boolean values
     };
   }
 }

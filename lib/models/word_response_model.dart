@@ -16,11 +16,14 @@ class WordResponseModel {
   });
 
   factory WordResponseModel.fromJson(Map<String, dynamic> json) {
-    List<Phonetic> pheonethics =
-        json['phonetics'].map<Phonetic>((pheonetic) => Phonetic.fromJson(pheonetic)).toList() ?? [];
-
-    List<Meaning> meanings =
-        json['meanings'].map<Meaning>((def) => Meaning.fromJson(def)).toList() ?? [];
+    final pheonethics = <Phonetic>[];
+    final meanings = <Meaning>[];
+    for (var pheonetic in json['pheonetics']) {
+      pheonethics.add(Phonetic.fromJson(pheonetic));
+    }
+    for (var meaning in json['meanings']) {
+      meanings.add(Meaning.fromJson(meaning));
+    }
 
     return WordResponseModel(
       word: json['word'],
@@ -46,10 +49,14 @@ class Meaning {
   });
 
   factory Meaning.fromJson(Map<String, dynamic> json) {
+    var definitions = <Definition>[];
+    for (var definition in json['definitions']) {
+      definitions.add(Definition.fromJson(definition));
+    }
+
     return Meaning(
       partOfSpeech: json['partOfSpeech'],
-      definitions:
-          json['definitions'].map<Definition>((def) => Definition.fromJson(def)).toList() ?? [],
+      definitions: definitions,
     );
   }
 }
