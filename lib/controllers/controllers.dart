@@ -1,2 +1,2 @@
-export 'words.controller.dart';
-export 'word.controller.dart';
+export 'words_controller.dart';
+export 'word_controller.dart';

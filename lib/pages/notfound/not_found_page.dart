@@ -1,4 +1,4 @@
-import 'package:dicionario_desafio/styles/text.style.dart';
+import 'package:dicionario_desafio/styles/text_tyle.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

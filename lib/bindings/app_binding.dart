@@ -1,5 +1,6 @@
-import 'package:dicionario_desafio/services/database.services.dart';
 import 'package:get/get.dart';
+
+import 'package:dicionario_desafio/services/services.dart';
 
 class AppBindings implements Bindings {
   @override

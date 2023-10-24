@@ -1,6 +1,5 @@
 import 'package:dicionario_desafio/bindings/binding.dart';
 import 'package:dicionario_desafio/env/env.dart';
-import 'package:dicionario_desafio/pages/notfound/404.page.dart';
 import 'package:dicionario_desafio/pages/pages.dart';
 import 'package:get/get.dart';
 

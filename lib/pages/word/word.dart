@@ -1,1 +1,1 @@
-export 'word.page.dart';
+export 'word_page.dart';

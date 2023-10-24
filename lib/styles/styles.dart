@@ -1,1 +1,2 @@
-export 'text.style.dart';
+export 'text_tyle.dart';
+export 'app_theme.dart';

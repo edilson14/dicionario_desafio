@@ -1,3 +1,3 @@
-export 'word.list.dart';
+export 'word_list.dart';
 export 'word.dart';
-export 'app.binding.dart';
+export 'app_binding.dart';

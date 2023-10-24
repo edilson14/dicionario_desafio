@@ -1,6 +1,6 @@
 // ignore_for_file: invalid_use_of_protected_member
 
-import 'package:dicionario_desafio/controllers/words.controller.dart';
+import 'package:dicionario_desafio/controllers/words_controller.dart';
 import 'package:dicionario_desafio/services/services.dart';
 import 'package:get/get.dart';
 import 'package:just_audio/just_audio.dart';
@@ -99,14 +99,16 @@ class WordController extends GetxController {
 
   void handleNavigation({next = true}) {
     Word navigatioWord;
+    int wordId;
     if (next) {
-      int wordId = word.id + 1;
+      wordId = word.id + 1;
       navigatioWord = _wordsController.words.firstWhere(
         (element) => element.id == wordId,
       );
     } else {
+      wordId = word.id - 1;
       navigatioWord = _wordsController.words.firstWhere(
-        (element) => element.id == (word.id - 1),
+        (element) => element.id == wordId,
       );
     }
 

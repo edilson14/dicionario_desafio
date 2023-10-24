@@ -42,8 +42,7 @@ class WordPage extends StatelessWidget {
                               child: SizedBox(
                                 width: MediaQuery.of(context).size.width,
                                 child: Card(
-                                  color:
-                                      const Color.fromARGB(255, 202, 120, 120),
+                                  color: const Color.fromARGB(255, 202, 120, 120),
                                   child: Column(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
@@ -71,11 +70,9 @@ class WordPage extends StatelessWidget {
                                         children: [
                                           IconButton(
                                             iconSize: 50,
-                                            onPressed: () =>
-                                                _wordController.playAudio(),
+                                            onPressed: () => _wordController.playAudio(),
                                             icon: Icon(
-                                              _wordController.audioStatus ==
-                                                      AudioStatus.playing
+                                              _wordController.audioStatus == AudioStatus.playing
                                                   ? Icons.pause
                                                   : Icons.play_arrow,
                                             ),
@@ -85,8 +82,7 @@ class WordPage extends StatelessWidget {
                                     : const Center(
                                         child: Text(
                                           'Não possui audio',
-                                          style: TextStyle(
-                                              fontWeight: FontWeight.bold),
+                                          style: TextStyle(fontWeight: FontWeight.bold),
                                         ),
                                       ),
                               ),
@@ -108,8 +104,7 @@ class WordPage extends StatelessWidget {
                           TextButton(
                             style: AppStyles.buttonStyle,
                             onPressed: _wordController.word.id != 0
-                                ? () => _wordController.handleNavigation(
-                                    next: false)
+                                ? () => _wordController.handleNavigation(next: false)
                                 : null,
                             child: Text(
                               'Voltar',

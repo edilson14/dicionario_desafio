@@ -51,8 +51,7 @@ class DataBaseServices {
 
   Future<WordInfoModel?> getWordById({required int wordId}) async {
     final db = _database;
-    List<Map> word =
-        await db.query(wordTable, where: 'id = ?', whereArgs: [wordId]);
+    List<Map> word = await db.query(wordTable, where: 'id = ?', whereArgs: [wordId]);
     return word.isNotEmpty ? WordInfoModel.fromDataBase(word[0]) : null;
   }
 

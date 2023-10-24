@@ -1,9 +1,12 @@
-import 'package:flutter/widgets.dart';
+import 'package:flutter/material.dart';
 
 class MeaningComponent extends StatelessWidget {
   final List<String> meaning;
 
-  const MeaningComponent({super.key, required this.meaning});
+  const MeaningComponent({
+    super.key,
+    required this.meaning,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +23,7 @@ class MeaningComponent extends StatelessWidget {
               fontSize: 30,
             ),
           ),
-          ListView.builder(
+          ListView.separated(
             shrinkWrap: true,
             itemCount: meaning.length,
             itemBuilder: (_, index) {
@@ -29,11 +32,11 @@ class MeaningComponent extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(text),
-                  const SizedBox(
-                    height: 10,
-                  )
                 ],
               );
+            },
+            separatorBuilder: (_, s) {
+              return const Divider();
             },
           ),
         ],
